@@ -1,15 +1,17 @@
 # Personal_Project
 
 ## Idee
-Een app waar mensen hun restjes/ingredienten kunnen weggeven, verkopen of ruilen.
+Een app waar mensen hun restjes/ingredienten kunnen weggeven of ruilen.
 
 ### Doelgroep
-Mensen die beginnend alleen wonen, begin samenwonende koppels.
+- Personen die beginnend alleen wonen/begin samenwonende koppels.
+- Ouderen
+- Iedereen die food waste wil tegengaan.
+- Iemand die geen zin of tijd heeft om te koken en toch wil gezond eten/ warme maaltijden i.p.v. te grijpen naar kant- en klaremaaltijden, fast food of afhaal maaltijden.
 
 ### Doel
 - Food waste verminderen en tegengaan.
-- Als je pas alleen woont kan het soms moeilijk zijn om rond te komen dit kan zorgen voor
-een centje bij te verdienen of te besparen.
+- Als je (pas) alleen woont kan het soms moeilijk zijn om rond te komen, door deze app je besparen op inkopen. 
 
 ### Technisch
 - Applicatie in Swift en React Native
@@ -18,6 +20,7 @@ een centje bij te verdienen of te besparen.
 - Inloggen/Registreren
 - Zoeken achter leftovers
 - Mogelijkheid om te filteren categoriëen van soorten keukens(genre eten)
+- Mogelijkheid om mensen een rating te geven.
 
 ### Paginas
 - Landingspagina: Ontdek(afhankelijk van je locatie)
