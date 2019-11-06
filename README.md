@@ -33,3 +33,8 @@ In deze app kunnen mensen hun restjes en ingrediënten die ze over hebben of bij
 
 ### Blog
 https://arnobaert2.wixsite.com/mijnsite
+
+### Resources
+https://facebook.github.io/react-native/
+https://rnfirebase.io/
+https://firebase.google.com/
