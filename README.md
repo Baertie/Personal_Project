@@ -17,7 +17,7 @@ In deze app kunnen mensen hun restjes en ingrediënten die ze over hebben of bij
 - besparen op inkopen. 
 
 ### Deliverables
-- Applicatie in Swift en React Native
+- Applicatie in React Native
 
 ### Features
 - Inloggen/Registreren;
