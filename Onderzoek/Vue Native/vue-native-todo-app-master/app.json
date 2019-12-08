@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "sdkVersion": "35.0.0",
+    "name": "vueTodoApp",
+    "slug": "vuetodoapp",
+    "version": "0.1.0",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  }
+}
