@@ -1,16 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 
-const ProfileScreen = props => {
+const ListScreen = props => {
   return (
     <View style={styles.screen}>
-      <Text>Profile Screen</Text>
+      <Text>List Screen</Text>
     </View>
   );
 };
 
-ProfileScreen.navigationOptions = {
-  headerTitle: "Profile"
+ListScreen.navigationOptions = {
+  headerTitle: "Lijst"
 };
 
 const styles = StyleSheet.create({
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreen;
+export default ListScreen;

@@ -1,16 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const ProfileScreen = props => {
+const CategoryScreen = props => {
   return (
     <View style={styles.screen}>
-      <Text>Profile Screen</Text>
+      <Text>Category Screen</Text>
     </View>
   );
 };
 
-ProfileScreen.navigationOptions = {
-  headerTitle: "Profile"
+CategoryScreen.navigationOptions = {
+  headerTitle: "Categorie"
 };
 
 const styles = StyleSheet.create({
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ProfileScreen;
+export default CategoryScreen;
