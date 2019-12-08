@@ -11,7 +11,7 @@ import DetailScreen from "../screens/DetailScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import MessageScreen from "../screens/MessageScreen";
 import ListScreen from "../screens/ListScreen";
-import CategoryScreen from "../screens/CatergoryScreen";
+import CategoryRestantenScreen from "../screens/CatergoryRestantenScreen";
 
 import Colors from "../constants/Colors";
 
@@ -35,7 +35,7 @@ const HomeNavigator = createStackNavigator(
       screen: HomeScreen
     },
     Details: DetailScreen,
-    Category: CategoryScreen
+    CategoryRestanten: CategoryRestantenScreen
   },
   {
     // initialRouteName: 'Categories',

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
-import Navigator from "./navigation/AppNavigator";
+import AppNavigator from "./navigation/AppNavigator";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -23,5 +23,5 @@ export default function App() {
     );
   }
 
-  return <Navigator />;
+  return <AppNavigator />;
 }

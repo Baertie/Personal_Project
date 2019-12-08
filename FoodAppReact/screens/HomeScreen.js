@@ -1,24 +1,33 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, FlatList, Text, Button, StyleSheet } from "react-native";
+
+import CategorieItem from "../components/CategorieItem";
+import { CATEGORIES } from "../data/example-data";
 
 const HomeScreen = props => {
-  return (
-    <View style={styles.screen}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => {
-          props.navigation.navigate("Details", {
-            itemId: 86,
-            otherParam: "anything you want here"
+  const renderCategoryItem = itemData => {
+    return (
+      <CategorieItem
+        title={itemData.item.title}
+        imageUrl={itemData.item.imageUrl}
+        onSelect={() => {
+          props.navigation.navigate({
+            routeName: "CategoryRestanten",
+            params: {
+              categoryId: itemData.item.id
+            }
           });
         }}
       />
-      <Button
-        title="categorie"
-        onPress={() => {
-          props.navigation.navigate("Category");
-        }}
+    );
+  };
+  return (
+    <View style={styles.screen}>
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={CATEGORIES}
+        renderItem={renderCategoryItem}
+        horizontal={true}
       />
     </View>
   );

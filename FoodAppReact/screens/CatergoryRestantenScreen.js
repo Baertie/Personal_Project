@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const CategoryScreen = props => {
+const CategoryRestantenScreen = props => {
   return (
     <View style={styles.screen}>
       <Text>Category Screen</Text>
@@ -9,7 +9,7 @@ const CategoryScreen = props => {
   );
 };
 
-CategoryScreen.navigationOptions = {
+CategoryRestantenScreen.navigationOptions = {
   headerTitle: "Categorie"
 };
 
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CategoryScreen;
+export default CategoryRestantenScreen;
