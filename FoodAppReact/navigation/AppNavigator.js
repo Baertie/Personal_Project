@@ -34,8 +34,8 @@ const HomeNavigator = createStackNavigator(
     Home: {
       screen: HomeScreen
     },
-    Details: DetailScreen,
-    CategoryRestanten: CategoryRestantenScreen
+    CategoryRestanten: CategoryRestantenScreen,
+    RestantDetail: DetailScreen
   },
   {
     // initialRouteName: 'Categories',

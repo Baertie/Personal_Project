@@ -14,7 +14,8 @@ const HomeScreen = props => {
           props.navigation.navigate({
             routeName: "CategoryRestanten",
             params: {
-              categoryId: itemData.item.id
+              categoryId: itemData.item.id,
+              title: itemData.item.title
             }
           });
         }}
@@ -22,7 +23,7 @@ const HomeScreen = props => {
     );
   };
   return (
-    <View style={styles.screen}>
+    <View>
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={CATEGORIES}

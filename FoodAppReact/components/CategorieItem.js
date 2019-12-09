@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 const CategorieItem = props => {
   return (
     <View style={styles.item}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={props.onSelect}>
         <View style={styles.Container}>
           <Image source={props.imageUrl} style={{ width: 65, height: 65 }} />
           <Text style={(fontSize = 12)}>{props.title}</Text>

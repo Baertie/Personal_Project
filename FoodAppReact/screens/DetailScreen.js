@@ -8,22 +8,14 @@ const DetailScreen = props => {
     <View style={styles.screen}>
       <Text>Detail Screen</Text>
       <Text>
-        itemId: {JSON.stringify(navigation.getParam("itemId", "NO-ID"))}
+        itemId: {JSON.stringify(navigation.getParam("RestantId", "NO-ID"))}
       </Text>
-      <Text>
-        otherParam:{" "}
-        {JSON.stringify(navigation.getParam("otherParam", "default value"))}
-      </Text>
-      <Button
-        title="Update the title"
-        onPress={() => navigation.setParams({ otherParam: "Updated!" })}
-      />
     </View>
   );
 };
 
 DetailScreen.navigationOptions = ({ navigation }) => ({
-  headerTitle: navigation.getParam("otherParam", "test")
+  headerTitle: navigation.getParam("title")
 });
 
 const styles = StyleSheet.create({

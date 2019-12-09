@@ -1,17 +1,24 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import { CATEGORIES, MEALS } from "../data/example-data";
+import RestantList from "../components/RestantList";
+
 const CategoryRestantenScreen = props => {
+  const catId = props.navigation.getParam("categoryId");
+
+  const displayedRestanten = MEALS.filter(
+    meal => meal.categoryIds.indexOf(catId) >= 0
+  );
+
   return (
-    <View style={styles.screen}>
-      <Text>Category Screen</Text>
-    </View>
+    <RestantList listData={displayedRestanten} navigation={props.navigation} />
   );
 };
 
-CategoryRestantenScreen.navigationOptions = {
-  headerTitle: "Categorie"
-};
+CategoryRestantenScreen.navigationOptions = ({ navigation }) => ({
+  headerTitle: navigation.getParam("title")
+});
 
 const styles = StyleSheet.create({
   screen: {

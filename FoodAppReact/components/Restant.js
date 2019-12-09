@@ -1,23 +1,14 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  BackgroundImage,
-  StyleSheet
-} from "react-native";
-
-import Colors from "../constants/colors";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 
 const Restant = props => {
   return (
     <View>
-      <TouchableOpacity>
-        <BackgroundImage />
-        <Text></Text>
+      <TouchableOpacity onPress={props.onSelectRestant}>
+        <Image source={{ uri: props.imageUrl }} />
+        <Text>{props.title}</Text>
         <View>
-          <Text></Text>
-          <Text></Text>
+          <Text>{props.date}</Text>
         </View>
       </TouchableOpacity>
     </View>
