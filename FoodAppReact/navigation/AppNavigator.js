@@ -11,6 +11,7 @@ import DetailScreen from "../screens/DetailScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import MessageScreen from "../screens/MessageScreen";
 import ListScreen from "../screens/ListScreen";
+import FilterScreen from "../screens/FilterScreen";
 import CategoryRestantenScreen from "../screens/CatergoryRestantenScreen";
 
 import Colors from "../constants/Colors";
@@ -35,6 +36,7 @@ const HomeNavigator = createStackNavigator(
       screen: HomeScreen
     },
     CategoryRestanten: CategoryRestantenScreen,
+    Filters: FilterScreen,
     RestantDetail: DetailScreen
   },
   {

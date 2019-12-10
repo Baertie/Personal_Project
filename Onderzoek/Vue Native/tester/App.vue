@@ -6,7 +6,7 @@
 import { createAppContainer, createStackNavigator } from "vue-native-router";
 
 import HomeScreen from "./screens/HomeScreen.vue";
-import DetailsScreen from "./screens/DetailsScreen.vue";
+import DetailsScreen from "./screens/DetailScreen.vue";
 
 const StackNavigator = createStackNavigator(
   {

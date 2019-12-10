@@ -35,7 +35,13 @@ const HomeScreen = props => {
 };
 
 HomeScreen.navigationOptions = ({ navigation }) => ({
-  headerTitle: "Home"
+  headerTitle: "Home",
+  headerRight: (
+    <Button
+      title="Filt"
+      onPress={() => navigation.navigate({ routeName: "Filters" })}
+    />
+  )
 });
 
 const styles = StyleSheet.create({

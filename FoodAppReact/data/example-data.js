@@ -76,5 +76,16 @@ export const MEALS = [
     false,
     false,
     true
+  ),
+  new Restant(
+    "3",
+    ["c1", "c6"],
+    "10/12/2019",
+    "Spaghetti Carbonara",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg",
+    false,
+    false,
+    false,
+    true
   )
 ];

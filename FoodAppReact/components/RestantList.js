@@ -14,7 +14,7 @@ const RestantList = props => {
           props.navigation.navigate({
             routeName: "RestantDetail",
             params: {
-              RestantId: itemData.item.id,
+              restantId: itemData.item.id,
               title: itemData.item.title
             }
           });
@@ -30,11 +30,16 @@ const RestantList = props => {
         keyExtractor={(item, index) => item.id}
         renderItem={renderRestantItem}
         style={{ width: "100%" }}
+        numColumns={2}
       />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  list: {
+    flex: 1
+  }
+});
 
 export default RestantList;

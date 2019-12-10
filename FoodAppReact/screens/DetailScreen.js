@@ -1,15 +1,23 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Image, Button, StyleSheet } from "react-native";
+
+import { MEALS } from "../data/example-data";
 
 const DetailScreen = props => {
-  const { navigation } = props;
+  const restantId = props.navigation.getParam("restantId");
+
+  const selectedRestant = MEALS.find(restant => restant.id === restantId);
 
   return (
-    <View style={styles.screen}>
-      <Text>Detail Screen</Text>
-      <Text>
-        itemId: {JSON.stringify(navigation.getParam("RestantId", "NO-ID"))}
-      </Text>
+    <View>
+      <Image source={{ uri: selectedRestant.imageUrl }} />
+      <View>
+        <Text>{selectedRestant.title}</Text>
+        <Text>Vervaldatum:{selectedRestant.date}</Text>
+        <Text>
+          Gluten vrij:{selectedRestant.isGlutenFree ? "true" : "false"}
+        </Text>
+      </View>
     </View>
   );
 };

@@ -1,15 +1,26 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-
-import { CATEGORIES, MEALS } from "../data/example-data";
+import { useSelector } from "react-redux";
 import RestantList from "../components/RestantList";
 
 const CategoryRestantenScreen = props => {
   const catId = props.navigation.getParam("categoryId");
 
-  const displayedRestanten = MEALS.filter(
-    meal => meal.categoryIds.indexOf(catId) >= 0
+  const availableRestanten = useSelector(
+    state => state.restanten.filteredRestanten
   );
+
+  const displayedRestanten = availableRestanten.filter(
+    restant => restant.categoryIds.indexOf(catId) >= 0
+  );
+
+  if (displayedRestanten.length === 0) {
+    return (
+      <View style={styles.content}>
+        <Text>Er zijn geen restjes in deze categorie</Text>
+      </View>
+    );
+  }
 
   return (
     <RestantList listData={displayedRestanten} navigation={props.navigation} />
