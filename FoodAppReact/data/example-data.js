@@ -57,6 +57,7 @@ export const CATEGORIES = [
 export const MEALS = [
   new Restant(
     "1",
+    "u1",
     ["c1", "c6"],
     "10/12/2019",
     "Spaghetti Carbonara",
@@ -68,6 +69,7 @@ export const MEALS = [
   ),
   new Restant(
     "2",
+    "u1",
     ["c7", "c5"],
     "13/12/2019",
     "Salade met gerookte zalm",
@@ -79,6 +81,7 @@ export const MEALS = [
   ),
   new Restant(
     "3",
+    "u2",
     ["c1", "c6"],
     "10/12/2019",
     "Spaghetti Carbonara",

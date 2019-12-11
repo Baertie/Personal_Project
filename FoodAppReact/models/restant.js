@@ -1,6 +1,7 @@
 class Restant {
   constructor(
     id,
+    ownerId,
     categoryIds,
     date,
     title,
@@ -11,6 +12,7 @@ class Restant {
     isLactoseFree
   ) {
     this.id = id;
+    this.ownerId = ownerId;
     this.categoryIds = categoryIds;
     this.date = date;
     this.title = title;

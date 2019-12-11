@@ -10,7 +10,8 @@ import HomeScreen from "../screens/HomeScreen";
 import DetailScreen from "../screens/DetailScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import MessageScreen from "../screens/MessageScreen";
-import ListScreen from "../screens/ListScreen";
+import UserRestantenScreen from "../screens/user/UserRestantenScreen";
+import EditRestantScreen from "../screens/user/EditRestantScreen";
 import FilterScreen from "../screens/FilterScreen";
 import CategoryRestantenScreen from "../screens/CatergoryRestantenScreen";
 
@@ -66,7 +67,19 @@ const MessageNavigator = createStackNavigator(
 
 const ListNavigator = createStackNavigator(
   {
-    List: ListScreen
+    List: UserRestantenScreen,
+    EditRestant: EditRestantScreen,
+    RestantDetail: DetailScreen
+  },
+  {
+    // initialRouteName: 'Categories',
+    defaultNavigationOptions: defaultStackNavOptions
+  }
+);
+
+const AddNavigator = createStackNavigator(
+  {
+    AddRestant: EditRestantScreen
   },
   {
     // initialRouteName: 'Categories',
@@ -102,6 +115,23 @@ const tabScreenConfig = {
           <Text style={{ fontFamily: "open-sans-bold" }}>Lijst</Text>
         ) : (
           "Lijst"
+        )
+    }
+  },
+  Add: {
+    screen: AddNavigator,
+    navigationOptions: {
+      tabBarIcon: tabInfo => {
+        return (
+          <Ionicons name="ios-create" size={25} color={tabInfo.tintColor} />
+        );
+      },
+      tabBarColor: Colors.accentColor,
+      tabBarLabel:
+        Platform.OS === "android" ? (
+          <Text style={{ fontFamily: "open-sans-bold" }}>Add</Text>
+        ) : (
+          "Add"
         )
     }
   },
