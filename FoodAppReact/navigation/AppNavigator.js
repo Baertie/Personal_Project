@@ -46,6 +46,15 @@ const HomeNavigator = createStackNavigator(
   }
 );
 
+const FilterNavigator = createStackNavigator(
+  {
+    Filters: FilterScreen
+  },
+  {
+    // initialRouteName: 'Categories',
+    defaultNavigationOptions: defaultStackNavOptions
+  }
+);
 const ProfileNavigator = createStackNavigator(
   {
     Profile: ProfileScreen

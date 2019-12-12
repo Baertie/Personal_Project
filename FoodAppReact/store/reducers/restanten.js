@@ -3,7 +3,8 @@ import {
   SET_FILTERS,
   DELETE_RESTANT,
   CREATE_RESTANT,
-  UPDATE_RESTANT
+  UPDATE_RESTANT,
+  SET_RESTANTEN
 } from "../actions/restantAction";
 import Restant from "../../models/restant";
 
@@ -15,9 +16,15 @@ const initialState = {
 
 const restantenReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_RESTANTEN:
+      return {
+        restanten: action.restanten,
+        filteredRestanten: action.restanten,
+        userRestanten: action.restanten.filter(prod => prod.ownerId === "u1")
+      };
     case CREATE_RESTANT:
       const nieuweRestant = new Restant(
-        new Date().toString(),
+        action.restantData.id,
         "u1",
         ["c1"],
         action.restantData.date,

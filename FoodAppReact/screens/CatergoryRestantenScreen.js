@@ -1,10 +1,41 @@
-import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState, useCallback } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import Restant from "../components/Restant";
+import Colors from "../constants/Colors";
+
+import * as restantenActions from "../store/actions/restantAction";
 
 const CategoryRestantenScreen = props => {
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
   const catId = props.navigation.getParam("categoryId");
+
+  const loadRestanten = useCallback(async () => {
+    setIsLoading(true);
+    await dispatch(restantenActions.fetchRestanten());
+    setIsLoading(false);
+  }, [dispatch, setIsLoading]);
+
+  useEffect(() => {
+    loadRestanten();
+  }, [dispatch, loadRestanten]);
+
+  useEffect(() => {
+    const willFocusListener = props.navigation.addListener(
+      "willFocus",
+      loadRestanten
+    );
+    return () => {
+      willFocusListener.remove();
+    };
+  }, [loadRestanten]);
 
   const availableRestanten = useSelector(
     state => state.restanten.filteredRestanten
@@ -14,10 +45,18 @@ const CategoryRestantenScreen = props => {
     restant => restant.categoryIds.indexOf(catId) >= 0
   );
 
-  if (displayedRestanten.length === 0) {
+  if (!isLoading && displayedRestanten.length === 0) {
     return (
       <View style={styles.content}>
         <Text>Er zijn geen restjes in deze categorie</Text>
+      </View>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <View style={styles.content}>
+        <ActivityIndicator size="large" color={Colors.primaryColor} />
       </View>
     );
   }

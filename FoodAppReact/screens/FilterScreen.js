@@ -75,7 +75,7 @@ FiltersScreen.navigationOptions = navData => {
   return {
     headerTitle: "Filter Restanten",
     headerRight: (
-      <Button title="SaveBack" onPress={navData.navigation.getParam("save")} />
+      <Button title="Save" onPress={navData.navigation.getParam("save")} />
     )
   };
 };
