@@ -1,10 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Button, Text, StyleSheet } from "react-native";
+import { Colors } from "react-native-paper";
 
 const ProfileScreen = props => {
   return (
     <View style={styles.screen}>
-      <Text>Profile Screen</Text>
+      <Button
+        title="Uitloggen"
+        color={Colors.primaryColor}
+        onPress={() => {}}
+      />
     </View>
   );
 };

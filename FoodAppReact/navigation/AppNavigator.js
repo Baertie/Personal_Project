@@ -15,6 +15,7 @@ import EditRestantScreen from "../screens/user/EditRestantScreen";
 import FilterScreen from "../screens/FilterScreen";
 import CategoryRestantenScreen from "../screens/CatergoryRestantenScreen";
 import AuthScreen from "../screens/user/AuthScreen";
+import StartupScreen from "../screens/StartupScreen";
 
 import Colors from "../constants/Colors";
 
@@ -203,6 +204,7 @@ const AuthNavigator = createStackNavigator(
 );
 
 const MainNavigator = createSwitchNavigator({
+  Startup: StartupScreen,
   Auth: AuthNavigator,
   Rest: RestNavigator
 });
