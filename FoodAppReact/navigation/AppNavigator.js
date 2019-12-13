@@ -1,6 +1,6 @@
 import React from "react";
 import { Platform, Text } from "react-native";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 import { Ionicons } from "@expo/vector-icons";
@@ -14,6 +14,7 @@ import UserRestantenScreen from "../screens/user/UserRestantenScreen";
 import EditRestantScreen from "../screens/user/EditRestantScreen";
 import FilterScreen from "../screens/FilterScreen";
 import CategoryRestantenScreen from "../screens/CatergoryRestantenScreen";
+import AuthScreen from "../screens/user/AuthScreen";
 
 import Colors from "../constants/Colors";
 
@@ -41,7 +42,6 @@ const HomeNavigator = createStackNavigator(
     RestantDetail: DetailScreen
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions
   }
 );
@@ -51,7 +51,6 @@ const FilterNavigator = createStackNavigator(
     Filters: FilterScreen
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions
   }
 );
@@ -60,7 +59,6 @@ const ProfileNavigator = createStackNavigator(
     Profile: ProfileScreen
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions
   }
 );
@@ -69,7 +67,6 @@ const MessageNavigator = createStackNavigator(
     Messages: MessageScreen
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions
   }
 );
@@ -81,7 +78,6 @@ const ListNavigator = createStackNavigator(
     RestantDetail: DetailScreen
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions
   }
 );
@@ -91,7 +87,6 @@ const AddNavigator = createStackNavigator(
     AddRestant: EditRestantScreen
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions
   }
 );
@@ -180,7 +175,7 @@ const tabScreenConfig = {
   }
 };
 
-const HomeProfTabNavigator =
+const RestNavigator =
   Platform.OS === "android"
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
         activeTintColor: "white",
@@ -198,4 +193,18 @@ const HomeProfTabNavigator =
         }
       });
 
-export default createAppContainer(HomeProfTabNavigator);
+const AuthNavigator = createStackNavigator(
+  {
+    auth: AuthScreen
+  },
+  {
+    defaultNavigationOptions: defaultStackNavOptions
+  }
+);
+
+const MainNavigator = createSwitchNavigator({
+  Auth: AuthNavigator,
+  Rest: RestNavigator
+});
+
+export default createAppContainer(MainNavigator);

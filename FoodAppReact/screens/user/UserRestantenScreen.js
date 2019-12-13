@@ -14,7 +14,9 @@ const UserRestantenScreen = props => {
   return (
     <FlatList
       data={userRestanten}
-      keyExtractor={item => item.id}
+      keyExtractor={(item, index) => {
+        return item.id;
+      }}
       renderItem={itemData => (
         <Restant
           title={itemData.item.title}

@@ -9,9 +9,9 @@ import {
 import Restant from "../../models/restant";
 
 const initialState = {
-  restanten: MEALS,
-  userRestanten: MEALS.filter(prod => prod.ownerId === "u1"),
-  filteredRestanten: MEALS
+  restanten: [],
+  userRestanten: [],
+  filteredRestanten: []
 };
 
 const restantenReducer = (state = initialState, action) => {
@@ -19,13 +19,13 @@ const restantenReducer = (state = initialState, action) => {
     case SET_RESTANTEN:
       return {
         restanten: action.restanten,
-        filteredRestanten: action.restanten,
-        userRestanten: action.restanten.filter(prod => prod.ownerId === "u1")
+        userRestanten: action.userRestanten,
+        filteredRestanten: action.restanten
       };
     case CREATE_RESTANT:
       const nieuweRestant = new Restant(
         action.restantData.id,
-        "u1",
+        action.restantData.ownerId,
         ["c1"],
         action.restantData.date,
         action.restantData.title,
@@ -37,7 +37,7 @@ const restantenReducer = (state = initialState, action) => {
       );
       return {
         ...state,
-        filteredRestanten: state.filteredRestanten.concat(nieuweRestant),
+        restanten: state.restanten.concat(nieuweRestant),
         userRestanten: state.userRestanten.concat(nieuweRestant)
       };
     case UPDATE_RESTANT:
@@ -69,7 +69,7 @@ const restantenReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        filteredRestanten: updatedFilteredRestants,
+        restanten: updatedFilteredRestants,
         userRestanten: updatedUserRestanten
       };
     case SET_FILTERS:
@@ -90,15 +90,14 @@ const restantenReducer = (state = initialState, action) => {
         return true;
       });
       return { ...state, filteredRestanten: updatedFilteredRestanten };
+
     case DELETE_RESTANT:
       return {
         ...state,
         userRestanten: state.userRestanten.filter(
           restant => restant.id !== action.rid
         ),
-        filteredRestanten: state.filteredRestanten.filter(
-          restant => restant.id !== action.rid
-        )
+        restanten: state.restanten.filter(restant => restant.id !== action.rid)
       };
 
     default:

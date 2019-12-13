@@ -7,30 +7,47 @@ export const UPDATE_RESTANT = "UPDATE_RESTANT";
 export const SET_RESTANTEN = "SET_RESTANTEN";
 
 export const fetchRestanten = () => {
-  return async dispatch => {
-    const response = await fetch(
-      "https://foodapp-567b3.firebaseio.com/restanten.json"
-    );
-    const restData = await response.json();
-    const loadedRestanten = [];
-
-    for (const key in restData) {
-      loadedRestanten.push(
-        new Restant(
-          key,
-          "u1",
-          ["c1"],
-          restData[key].date,
-          restData[key].title,
-          restData[key].imageUrl,
-          false,
-          false,
-          false,
-          false
-        )
+  return async (dispatch, getState) => {
+    // any async code you want!
+    const userId = getState().auth.userId;
+    try {
+      const response = await fetch(
+        "https://foodapp-567b3.firebaseio.com/restanten.json"
       );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const resData = await response.json();
+      const loadedRestanten = [];
+
+      for (const key in resData) {
+        loadedRestanten.push(
+          new Restant(
+            key,
+            resData[key].ownerId,
+            ["c1"],
+            resData[key].date,
+            resData[key].title,
+            resData[key].imageUrl,
+            false,
+            false,
+            false,
+            false
+          )
+        );
+      }
+
+      dispatch({
+        type: SET_RESTANTEN,
+        restanten: loadedRestanten,
+        userRestanten: loadedRestanten.filter(rest => rest.ownerId === userId)
+      });
+    } catch (err) {
+      // send to custom analytics server
+      throw err;
     }
-    dispatch({ type: SET_RESTANTEN, restanten: loadedRestanten });
   };
 };
 
@@ -42,9 +59,10 @@ export const setFilters = filterSettings => {
 };
 
 export const deleteRestant = restantId => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
     await fetch(
-      `https://foodapp-567b3.firebaseio.com/restanten/${restantId}.json`,
+      `https://foodapp-567b3.firebaseio.com/restanten/${restantId}.json?auth=${token}`,
       {
         method: "DELETE"
       }
@@ -54,9 +72,11 @@ export const deleteRestant = restantId => {
 };
 
 export const createRestant = (title, imageUrl, date) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
+    const userId = getState().auth.userId;
     const response = await fetch(
-      "https://foodapp-567b3.firebaseio.com/restanten.json",
+      `https://foodapp-567b3.firebaseio.com/restanten.json?auth=${token}`,
       {
         method: "POST",
         headers: {
@@ -65,7 +85,8 @@ export const createRestant = (title, imageUrl, date) => {
         body: JSON.stringify({
           title,
           imageUrl,
-          date
+          date,
+          ownerId: userId
         })
       }
     );
@@ -77,24 +98,33 @@ export const createRestant = (title, imageUrl, date) => {
         id: restData.name,
         title,
         imageUrl,
-        date
+        date,
+        ownerId: userId
       }
     });
   };
 };
 
 export const updateRestant = (id, title, imageUrl) => {
-  return async dispatch => {
-    await fetch(`https://foodapp-567b3.firebaseio.com/restanten/${id}.json`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title,
-        imageUrl
-      })
-    });
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
+    const response = await fetch(
+      `https://foodapp-567b3.firebaseio.com/restanten/${id}.json?auth=${token}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title,
+          imageUrl
+        })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
+    }
 
     dispatch({
       type: UPDATE_RESTANT,
