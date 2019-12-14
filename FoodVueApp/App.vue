@@ -1,9 +1,15 @@
 <template>
   <view class="container">
-    <text class="text-color-primary">My Vue Native App</text>
+    <app></app>
   </view>
 </template>
+<script>
+import App from "./navigation/AppNavigator";
 
+export default {
+  components: { App }
+};
+</script>
 <style>
 .container {
   background-color: white;

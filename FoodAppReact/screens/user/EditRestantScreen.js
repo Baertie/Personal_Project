@@ -10,6 +10,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 import Input from "../../components/Input";
+import ImageSelector from "../../components/ImageSelector";
 import * as restantActions from "../../store/actions/restantAction";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
@@ -153,6 +154,7 @@ const EditRestantScreen = props => {
               required
             />
           )}
+          <ImageSelector onImageTaken={} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

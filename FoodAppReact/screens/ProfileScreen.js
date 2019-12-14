@@ -1,14 +1,20 @@
 import React from "react";
 import { View, Button, Text, StyleSheet } from "react-native";
 import { Colors } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import * as authActions from "../store/actions/authAction";
 
 const ProfileScreen = props => {
+  const dispatch = useDispatch();
   return (
     <View style={styles.screen}>
       <Button
         title="Uitloggen"
         color={Colors.primaryColor}
-        onPress={() => {}}
+        onPress={() => {
+          dispatch(authActions.logout);
+          // props.navigation.navigate("Auth");
+        }}
       />
     </View>
   );
