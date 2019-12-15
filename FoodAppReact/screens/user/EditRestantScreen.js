@@ -128,7 +128,7 @@ const EditRestantScreen = props => {
             initValid={!!editedRestant}
             required
           />
-          <Input
+          {/* <Input
             id="imageUrl"
             label="Afbeelding"
             errorText="Dit is geen geldige afbeelding!"
@@ -140,7 +140,7 @@ const EditRestantScreen = props => {
             initialValue={editedRestant ? editedRestant.imageUrl : ""}
             initValid={!!editedRestant}
             required
-          />
+          /> */}
           {editedRestant ? null : (
             <Input
               id="date"

@@ -1,10 +1,9 @@
 <template>
-  <view class="container">
-    <app></app>
-  </view>
+  <app></app>
 </template>
+
 <script>
-import App from "./navigation/AppNavigator";
+import App from "./navigation/AppNavigator.vue";
 
 export default {
   components: { App }
@@ -12,10 +11,9 @@ export default {
 </script>
 <style>
 .container {
-  background-color: white;
+  flex: 1;
   align-items: center;
   justify-content: center;
-  flex: 1;
 }
 .text-color-primary {
   color: blue;

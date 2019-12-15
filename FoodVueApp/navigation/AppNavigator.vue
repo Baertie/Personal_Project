@@ -4,7 +4,6 @@
 
 <script>
 import { Ionicons } from "@expo/vector-icons";
-
 import {
   createAppContainer,
   createSwitchNavigator,
@@ -20,7 +19,7 @@ import MessageScreen from "../screens/restanten/MessageScreen.vue";
 import UserRestantenScreen from "../screens/user/UserRestantenScreen.vue";
 import EditRestantScreen from "../screens/user/EditRestantScreen.vue";
 import FilterScreen from "../screens/restanten/FilterScreen.vue";
-import CategoryRestantenScreen from "../screens/restanten/CatergoryRestantenScreen.vue";
+import CategoryRestantenScreen from "../screens/restanten/CategoryRestantenScreen.vue";
 import AuthScreen from "../screens/user/AuthScreen.vue";
 import StartupScreen from "../screens/StartupScreen.vue";
 
@@ -30,21 +29,14 @@ const defaultStackNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
   },
-  headerTitleStyle: {
-    fontFamily: "open-sans-bold"
-  },
-  headerBackTitleStyle: {
-    fontFamily: "open-sans"
-  },
+
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
   headerTitle: "A Screen"
 };
 
 const HomeNavigator = createStackNavigator(
   {
-    Home: {
-      screen: HomeScreen
-    },
+    Home: HomeScreen,
     CategoryRestanten: CategoryRestantenScreen,
     Filters: FilterScreen,
     RestantDetail: DetailScreen
@@ -101,105 +93,23 @@ const AddNavigator = createStackNavigator(
 
 const tabScreenConfig = {
   Home: {
-    screen: HomeNavigator,
-    navigationOptions: {
-      tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-home" size={25} color={tabInfo.tintColor} />;
-      },
-      tabBarColor: Colors.primaryColor,
-      tabBarLabel:
-        Platform.OS === "android" ? (
-          <Text style={{ fontFamily: "open-sans-bold" }}>Home</Text>
-        ) : (
-          "Home"
-        )
-    }
+    screen: HomeNavigator
   },
   List: {
-    screen: ListNavigator,
-    navigationOptions: {
-      tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-list" size={25} color={tabInfo.tintColor} />;
-      },
-      tabBarColor: Colors.accentColor,
-      tabBarLabel:
-        Platform.OS === "android" ? (
-          <Text style={{ fontFamily: "open-sans-bold" }}>Lijst</Text>
-        ) : (
-          "Lijst"
-        )
-    }
+    screen: ListNavigator
   },
   Add: {
-    screen: AddNavigator,
-    navigationOptions: {
-      tabBarIcon: tabInfo => {
-        return (
-          <Ionicons name="ios-create" size={25} color={tabInfo.tintColor} />
-        );
-      },
-      tabBarColor: Colors.accentColor,
-      tabBarLabel:
-        Platform.OS === "android" ? (
-          <Text style={{ fontFamily: "open-sans-bold" }}>Add</Text>
-        ) : (
-          "Add"
-        )
-    }
+    screen: AddNavigator
   },
   Message: {
-    screen: MessageNavigator,
-    navigationOptions: {
-      tabBarIcon: tabInfo => {
-        return (
-          <Ionicons name="ios-chatboxes" size={25} color={tabInfo.tintColor} />
-        );
-      },
-      tabBarColor: Colors.accentColor,
-      tabBarLabel:
-        Platform.OS === "android" ? (
-          <Text style={{ fontFamily: "open-sans-bold" }}>Berichten</Text>
-        ) : (
-          "Berichten"
-        )
-    }
+    screen: MessageNavigator
   },
   Profile: {
-    screen: ProfileNavigator,
-    navigationOptions: {
-      tabBarIcon: tabInfo => {
-        return (
-          <Ionicons name="ios-contact" size={25} color={tabInfo.tintColor} />
-        );
-      },
-      tabBarColor: Colors.accentColor,
-      tabBarLabel:
-        Platform.OS === "android" ? (
-          <Text style={{ fontFamily: "open-sans-bold" }}>Profiel</Text>
-        ) : (
-          "Profiel"
-        )
-    }
+    screen: ProfileNavigator
   }
 };
 
-const RestNavigator =
-  Platform.OS === "android"
-    ? createMaterialBottomTabNavigator(tabScreenConfig, {
-        activeTintColor: "white",
-        shifting: true,
-        barStyle: {
-          backgroundColor: Colors.primaryColor
-        }
-      })
-    : createBottomTabNavigator(tabScreenConfig, {
-        tabBarOptions: {
-          labelStyle: {
-            fontFamily: "open-sans"
-          },
-          activeTintColor: Colors.accentColor
-        }
-      });
+const RestNavigator = createBottomTabNavigator(tabScreenConfig);
 
 const AuthNavigator = createStackNavigator(
   {
@@ -211,9 +121,8 @@ const AuthNavigator = createStackNavigator(
 );
 
 const MainNavigator = createSwitchNavigator({
-  Startup: StartupScreen,
-  Auth: AuthNavigator,
-  Rest: RestNavigator
+  Rest: RestNavigator,
+  Auth: AuthNavigator
 });
 
 const AppNavigator = createAppContainer(MainNavigator);
