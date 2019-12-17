@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Button,
   ActivityIndicator,
-  Alert
+  Alert,
+  Text
 } from "react-native";
 import { useDispatch } from "react-redux";
 
@@ -106,10 +107,14 @@ const AuthScreen = props => {
       style={styles.screen}
     >
       <View style={styles.authContainer}>
-        <ScrollView>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>LEFT.OVER</Text>
+        </View>
+        <View>
           <Input
             id="email"
             label="E-mail"
+            labelStyle={styles.label}
             keyboardType="email-address"
             required
             email
@@ -121,6 +126,7 @@ const AuthScreen = props => {
           <Input
             id="password"
             label="wachtwoord"
+            labelStyle={styles.label}
             keyboardType="default"
             required
             secureTextEntry
@@ -128,7 +134,7 @@ const AuthScreen = props => {
             autoCapitalize="none"
             errorText="Geef een geldig password in!"
             onInputChange={inputChangeHandler}
-            iniialValue=""
+            initialValue=""
           />
           <View style={styles.buttonContainer}>
             {isLoading ? (
@@ -136,7 +142,7 @@ const AuthScreen = props => {
             ) : (
               <Button
                 title={isSignup ? "Registreren" : "Inloggen"}
-                color={Colors.primaryColor}
+                color={Colors.WhiteColor}
                 onPress={authHandler}
               />
             )}
@@ -150,29 +156,44 @@ const AuthScreen = props => {
               }}
             />
           </View>
-        </ScrollView>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
 };
 
 AuthScreen.navigationOptions = {
-  headerTitle: "Inloggen"
+  header: null
 };
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: Colors.primaryColor
   },
   authContainer: {
     width: "80%",
     maxWidth: 400,
     height: "50%",
-    maxHeight: 400
+    maxHeight: 500,
+    justifyContent: "space-around"
   },
   buttonContainer: {
     marginTop: 10
+  },
+  textContainer: {
+    width: "100%",
+    justifyContent: "flex-start",
+    alignItems: "center"
+  },
+  title: {
+    fontFamily: "open-sans-bold",
+    fontSize: 25,
+    color: "white"
+  },
+  label: {
+    color: "white"
   }
 });
 

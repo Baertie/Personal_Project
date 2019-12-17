@@ -1,16 +1,19 @@
-import React, { useEffect, useCallback, useReducer } from "react";
+import React, { useEffect, useCallback, useReducer, useState } from "react";
 import {
   View,
   ScrollView,
   Button,
   StyleSheet,
   Alert,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Picker
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import DatePicker from "react-native-datepicker";
 
 import Input from "../../components/Input";
 import ImageSelector from "../../components/ImageSelector";
+import TypeSwitch from "../../components/typeSwitch";
 import * as restantActions from "../../store/actions/restantAction";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
@@ -39,6 +42,13 @@ const formReducer = (state, action) => {
 };
 
 const EditRestantScreen = props => {
+  const [isGlutenFree, setIsGlutenFree] = useState(false);
+  const [isLactoseFree, setIsLactoseFree] = useState(false);
+  const [isVegan, setIsVegan] = useState(false);
+  const [isVegetarian, setIsVegetarian] = useState(false);
+  const [categorie, setCategorie] = useState("c1");
+  const [date, setDate] = useState(new Date().toISOString());
+
   const restId = props.navigation.getParam("restantId");
   const editedRestant = useSelector(state =>
     state.restanten.userRestanten.find(restant => restant.id === restId)
@@ -49,13 +59,19 @@ const EditRestantScreen = props => {
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
       title: editedRestant ? editedRestant.title : "",
+      categorie: "",
       imageUrl: editedRestant ? editedRestant.imageUrl : "",
-      date: ""
+      date: "",
+      description: editedRestant ? editedRestant.description : "",
+      isGlutenFree: "",
+      isVegan: "",
+      isVegetarian: "",
+      isLactoseFree: ""
     },
     inputValidities: {
       title: editedRestant ? true : false,
       imageUrl: editedRestant ? true : false,
-      date: editedRestant ? true : false
+      description: editedRestant ? true : false
     },
     formIsValid: editedRestant ? true : false
   });
@@ -74,21 +90,29 @@ const EditRestantScreen = props => {
         restantActions.updateRestant(
           restId,
           formState.inputValues.title,
-          formState.inputValues.imageUrl
+          formState.inputValues.imageUrl,
+          formState.inputValues.description
         )
       );
       console.log("update");
+      props.navigation.goBack();
     } else {
       dispatch(
         restantActions.createRestant(
           formState.inputValues.title,
+          categorie,
           formState.inputValues.imageUrl,
-          formState.inputValues.date
+          date,
+          formState.inputValues.description,
+          isGlutenFree,
+          isVegan,
+          isVegetarian,
+          isLactoseFree
         )
       );
       console.log("create");
+      props.navigation.goBack();
     }
-    props.navigation.goBack();
   }, [dispatch, restId, formState]);
 
   useEffect(() => {
@@ -128,7 +152,7 @@ const EditRestantScreen = props => {
             initValid={!!editedRestant}
             required
           />
-          {/* <Input
+          <Input
             id="imageUrl"
             label="Afbeelding"
             errorText="Dit is geen geldige afbeelding!"
@@ -140,21 +164,80 @@ const EditRestantScreen = props => {
             initialValue={editedRestant ? editedRestant.imageUrl : ""}
             initValid={!!editedRestant}
             required
-          /> */}
+          />
+          <Input
+            id="description"
+            label="Omschrijving"
+            errorText="Dit is geen geldige omschrijving!"
+            keyboardType="default"
+            autoCapitalize="sentences"
+            autoCorrect
+            multiline
+            numberOfLines={3}
+            returnKeyType="next"
+            onInputChange={inputChangeHandler}
+            initialValue={editedRestant ? editedRestant.description : ""}
+            initValid={!!editedRestant}
+            required
+          />
           {editedRestant ? null : (
-            <Input
-              id="date"
-              label="Vervaldatum"
-              errorText="Geef een geldige vervaldatum!"
-              keyboardType="default"
-              autoCapitalize="sentences"
-              autoCorrect
-              returnKeyType="next"
-              onInputChange={inputChangeHandler}
-              required
-            />
+            <View style={styles.container}>
+              <DatePicker
+                style={{
+                  width: "100%",
+                  marginTop: 40,
+                  borderColor: "black",
+                  borderWidth: 1
+                }}
+                date={date} //initial date from state
+                mode="date" //The enum of date, datetime and time
+                placeholder="selecteer houdbaarheidsdatum"
+                format="DD-MM-YYYY"
+                minDate="16-12-2019"
+                maxDate="01-01-2025"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                onDateChange={datum => {
+                  setDate(datum);
+                }}
+              />
+              <Picker
+                selectedValue={categorie}
+                onValueChange={itemValue => setCategorie(itemValue)}
+              >
+                <Picker.Item label="Italiaans" value="c1" />
+                <Picker.Item label="Amerikaans" value="c2" />
+                <Picker.Item label="Belgisch" value="c3" />
+                <Picker.Item label="Mexicaans" value="c4" />
+                <Picker.Item label="Japans" value="c8" />
+                <Picker.Item label="Chinees" value="c9" />
+                <Picker.Item label="Groenten" value="c5" />
+                <Picker.Item label="Vlees" value="c6" />
+                <Picker.Item label="Vis" value="c7" />
+                <Picker.Item label="Fruit" value="c10" />
+              </Picker>
+              <TypeSwitch
+                label="Gluten-free"
+                state={isGlutenFree}
+                onChange={newValue => setIsGlutenFree(newValue)}
+              />
+              <TypeSwitch
+                label="Lactose-free"
+                state={isLactoseFree}
+                onChange={newValue => setIsLactoseFree(newValue)}
+              />
+              <TypeSwitch
+                label="Vegan"
+                state={isVegan}
+                onChange={newValue => setIsVegan(newValue)}
+              />
+              <TypeSwitch
+                label="Vegetarian"
+                state={isVegetarian}
+                onChange={newValue => setIsVegetarian(newValue)}
+              />
+            </View>
           )}
-          <ImageSelector onImageTaken={} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

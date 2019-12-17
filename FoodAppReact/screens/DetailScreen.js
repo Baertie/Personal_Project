@@ -1,22 +1,98 @@
 import React from "react";
 import { View, Text, Image, Button, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
 
-import { MEALS } from "../data/example-data";
+import DefaultText from "../components/DefaultText";
+import Title from "../components/Title";
 
 const DetailScreen = props => {
   const restantId = props.navigation.getParam("restantId");
-
-  const selectedRestant = MEALS.find(restant => restant.id === restantId);
+  const selectedRestant = useSelector(state =>
+    state.restanten.restanten.find(restant => restant.id === restantId)
+  );
 
   return (
-    <View>
-      <Image source={{ uri: selectedRestant.imageUrl }} />
-      <View>
-        <Text>{selectedRestant.title}</Text>
-        <Text>Vervaldatum:{selectedRestant.date}</Text>
-        <Text>
-          Gluten vrij:{selectedRestant.isGlutenFree ? "true" : "false"}
-        </Text>
+    <View style={styles.screen}>
+      <Image style={styles.image} source={{ uri: selectedRestant.imageUrl }} />
+      <View style={styles.infoContainer}>
+        <Title title={selectedRestant.title} />
+        <DefaultText text={selectedRestant.date} />
+        <DefaultText text={selectedRestant.description} />
+        <View style={styles.check}>
+          <DefaultText text="Gluten vrij:" />
+          {selectedRestant.isGlutenFree ? (
+            <Ionicons
+              style={styles.icon}
+              name="ios-checkmark-circle"
+              size={35}
+              color="green"
+            />
+          ) : (
+            <Ionicons
+              style={styles.icon}
+              name="ios-close-circle"
+              size={35}
+              color="red"
+            />
+          )}
+        </View>
+        <View style={styles.check}>
+          <DefaultText text="Vegan:" />
+          {selectedRestant.isVegan ? (
+            <Ionicons
+              style={styles.icon}
+              name="ios-checkmark-circle"
+              size={35}
+              color="green"
+            />
+          ) : (
+            <Ionicons
+              style={styles.icon}
+              name="ios-close-circle"
+              size={35}
+              color="red"
+            />
+          )}
+        </View>
+        <View style={styles.check}>
+          <DefaultText text="Vegetarisch:" />
+
+          {selectedRestant.isVegetarianFree ? (
+            <Ionicons
+              style={styles.icon}
+              name="ios-checkmark-circle"
+              size={35}
+              color="green"
+            />
+          ) : (
+            <Ionicons
+              style={styles.icon}
+              name="ios-close-circle"
+              size={35}
+              color="red"
+            />
+          )}
+        </View>
+        <View style={styles.check}>
+          <DefaultText text="Lactose vrij:" />
+
+          {selectedRestant.isLactoseFree ? (
+            <Ionicons
+              style={styles.icon}
+              name="ios-checkmark-circle"
+              size={35}
+              color="green"
+            />
+          ) : (
+            <Ionicons
+              style={styles.icon}
+              name="ios-close-circle"
+              size={35}
+              color="red"
+            />
+          )}
+        </View>
       </View>
     </View>
   );
@@ -29,8 +105,29 @@ DetailScreen.navigationOptions = ({ navigation }) => ({
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    alignItems: "center"
+  },
+  infoContainer: {
+    width: "80%",
+    maxWidth: 400,
+    height: "50%",
+    maxHeight: 400,
+    justifyContent: "space-around"
+  },
+  check: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center"
+    width: "40%",
+    marginVertical: 10
+  },
+  image: {
+    width: "100%",
+    height: "40%",
+    maxHeight: 400
+  },
+  icon: {
+    marginHorizontal: 10
   }
 });
 

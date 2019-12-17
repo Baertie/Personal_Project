@@ -26,14 +26,15 @@ const restantenReducer = (state = initialState, action) => {
       const nieuweRestant = new Restant(
         action.restantData.id,
         action.restantData.ownerId,
-        ["c1"],
+        action.restantData.categorie,
         action.restantData.date,
+        action.restantData.description,
         action.restantData.title,
         action.restantData.imageUrl,
-        false,
-        false,
-        false,
-        false
+        action.restantData.isGlutenFree,
+        action.restantData.isVegan,
+        action.restantData.isVegetarian,
+        action.restantData.isLactoseFree
       );
       return {
         ...state,
@@ -45,10 +46,11 @@ const restantenReducer = (state = initialState, action) => {
         restant => restant.id === action.rid
       );
       const updatedRestant = new Restant(
-        action.pid,
+        action.rid,
         state.userRestanten[restantIndex].ownerId,
-        state.userRestanten[restantIndex].categoryIds,
+        state.userRestanten[restantIndex].categorie,
         state.userRestanten[restantIndex].date,
+        action.restantData.description,
         action.restantData.title,
         action.restantData.imageUrl,
         state.userRestanten[restantIndex].isGlutenFree,

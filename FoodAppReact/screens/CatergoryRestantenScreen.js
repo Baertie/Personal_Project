@@ -47,7 +47,7 @@ const CategoryRestantenScreen = props => {
 
   if (!isLoading && displayedRestanten.length === 0) {
     return (
-      <View style={styles.content}>
+      <View style={styles.screen}>
         <Text>Er zijn geen restjes in deze categorie</Text>
       </View>
     );
@@ -55,7 +55,7 @@ const CategoryRestantenScreen = props => {
 
   if (isLoading) {
     return (
-      <View style={styles.content}>
+      <View style={styles.screen}>
         <ActivityIndicator size="large" color={Colors.primaryColor} />
       </View>
     );

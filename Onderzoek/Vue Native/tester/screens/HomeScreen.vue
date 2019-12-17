@@ -7,7 +7,6 @@
 
 <script>
 export default {
-  // Declare `navigation` as a prop
   props: {
     navigation: {
       type: Object
@@ -20,3 +19,11 @@ export default {
   }
 };
 </script>
+
+<style>
+.container {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+</style>

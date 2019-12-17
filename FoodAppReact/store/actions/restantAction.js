@@ -27,14 +27,15 @@ export const fetchRestanten = () => {
           new Restant(
             key,
             resData[key].ownerId,
-            ["c1"],
+            resData[key].categorie,
             resData[key].date,
+            resData[key].description,
             resData[key].title,
             resData[key].imageUrl,
-            false,
-            false,
-            false,
-            false
+            resData[key].isGlutenFree,
+            resData[key].isVegan,
+            resData[key].isVegetarian,
+            resData[key].isLactoseFree
           )
         );
       }
@@ -71,7 +72,17 @@ export const deleteRestant = restantId => {
   };
 };
 
-export const createRestant = (title, imageUrl, date) => {
+export const createRestant = (
+  title,
+  categorie,
+  imageUrl,
+  date,
+  description,
+  isGlutenFree,
+  isVegan,
+  isVegetarian,
+  isLactoseFree
+) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
@@ -84,8 +95,14 @@ export const createRestant = (title, imageUrl, date) => {
         },
         body: JSON.stringify({
           title,
+          categorie,
           imageUrl,
           date,
+          description,
+          isGlutenFree,
+          isVegan,
+          isVegetarian,
+          isLactoseFree,
           ownerId: userId
         })
       }
@@ -97,15 +114,21 @@ export const createRestant = (title, imageUrl, date) => {
       restantData: {
         id: restData.name,
         title,
+        categorie,
         imageUrl,
         date,
+        description,
+        isGlutenFree,
+        isVegan,
+        isVegetarian,
+        isLactoseFree,
         ownerId: userId
       }
     });
   };
 };
 
-export const updateRestant = (id, title, imageUrl) => {
+export const updateRestant = (id, title, imageUrl, description) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const response = await fetch(
@@ -117,7 +140,8 @@ export const updateRestant = (id, title, imageUrl) => {
         },
         body: JSON.stringify({
           title,
-          imageUrl
+          imageUrl,
+          description
         })
       }
     );
@@ -131,7 +155,8 @@ export const updateRestant = (id, title, imageUrl) => {
       rid: id,
       restantData: {
         title,
-        imageUrl
+        imageUrl,
+        description
       }
     });
   };

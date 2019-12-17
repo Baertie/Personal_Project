@@ -10,47 +10,43 @@ export const CATEGORIES = [
   new Categorie(
     "c2",
     "Amerikaans",
-    require("../assets/images/categories/italiaans.png")
+    require("../assets/images/categories/amerika.png")
   ),
   new Categorie(
     "c3",
     "Belgisch",
-    require("../assets/images/categories/italiaans.png")
+    require("../assets/images/categories/belgisch.png")
   ),
   new Categorie(
     "c4",
     "Mexicaans",
-    require("../assets/images/categories/italiaans.png")
-  ),
-  new Categorie(
-    "c5",
-    "Groenten",
-    require("../assets/images/categories/italiaans.png")
-  ),
-  new Categorie(
-    "c6",
-    "Vlees",
-    require("../assets/images/categories/italiaans.png")
-  ),
-  new Categorie(
-    "c7",
-    "Vis",
-    require("../assets/images/categories/italiaans.png")
+    require("../assets/images/categories/mexico.png")
   ),
   new Categorie(
     "c8",
     "Japans",
-    require("../assets/images/categories/italiaans.png")
+    require("../assets/images/categories/japan.png")
   ),
   new Categorie(
     "c9",
     "Chinees",
-    require("../assets/images/categories/italiaans.png")
+    require("../assets/images/categories/china.png")
   ),
+  new Categorie(
+    "c5",
+    "Groenten",
+    require("../assets/images/categories/groenten.png")
+  ),
+  new Categorie(
+    "c6",
+    "Vlees",
+    require("../assets/images/categories/vlees.png")
+  ),
+  new Categorie("c7", "Vis", require("../assets/images/categories/vis.png")),
   new Categorie(
     "c10",
     "Fruit",
-    require("../assets/images/categories/italiaans.png")
+    require("../assets/images/categories/fruit.png")
   )
 ];
 

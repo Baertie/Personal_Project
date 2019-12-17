@@ -4,6 +4,7 @@ class Restant {
     ownerId,
     categoryIds,
     date,
+    description,
     title,
     imageUrl,
     isGlutenFree,
@@ -15,6 +16,7 @@ class Restant {
     this.ownerId = ownerId;
     this.categoryIds = categoryIds;
     this.date = date;
+    this.description = description;
     this.title = title;
     this.imageUrl = imageUrl;
     this.isGlutenFree = isGlutenFree;

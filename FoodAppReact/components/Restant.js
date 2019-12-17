@@ -17,7 +17,8 @@ const Restant = props => {
             source={{ uri: props.imageUrl }}
             style={{
               width: props.width,
-              height: props.height
+              height: props.height,
+              borderRadius: 10
             }}
           />
           <Text>{props.title}</Text>
