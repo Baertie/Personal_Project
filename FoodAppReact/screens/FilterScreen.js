@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Switch, Platform, Button } from "react-native";
 import { useDispatch } from "react-redux";
+import DefaultText from "../components/DefaultText";
 
 import Colors from "../constants/Colors";
 import { setFilters } from "../store/actions/restantAction";
@@ -8,7 +9,7 @@ import { setFilters } from "../store/actions/restantAction";
 const FilterSwitch = props => {
   return (
     <View style={styles.filterContainer}>
-      <Text>{props.label}</Text>
+      <DefaultText text={props.label} />
       <Switch
         trackColor={{ true: Colors.primaryColor }}
         thumbColor={Platform.OS === "android" ? Colors.primaryColor : ""}

@@ -67,7 +67,7 @@ const Input = props => {
       <Text style={[styles.label, props.labelStyle]}>{props.label}</Text>
       <TextInput
         {...props}
-        style={styles.input}
+        style={[styles.input, props.inputStyle]}
         value={inputState.value}
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
@@ -86,9 +86,11 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   label: {
-    marginVertical: 12
+    marginVertical: 12,
+    fontFamily: "open-sans"
   },
   input: {
+    fontFamily: "open-sans",
     paddingHorizontal: 2,
     paddingVertical: 5,
     borderBottomColor: "#CCC",

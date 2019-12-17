@@ -49,11 +49,15 @@ const AuthScreen = props => {
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
       email: "",
-      password: ""
+      password: "",
+      firstName: "",
+      lastName: ""
     },
     inputValidities: {
       email: false,
-      password: false
+      password: false,
+      firstName: false,
+      lastName: false
     },
     formIsValid: false
   });
@@ -111,10 +115,41 @@ const AuthScreen = props => {
           <Text style={styles.title}>LEFT.OVER</Text>
         </View>
         <View>
+          {isSignup ? (
+            <View>
+              <Input
+                id="firstName"
+                label="Voornaam"
+                labelStyle={styles.label}
+                inputStyle={styles.input}
+                keyboardType="default"
+                required
+                autoCapitalize="words"
+                errorText="Geef je voornaam in"
+                onInputChange={inputChangeHandler}
+                initialValue=""
+                color="white"
+              />
+              <Input
+                id="lastName"
+                label="Acternaam"
+                labelStyle={styles.label}
+                inputStyle={styles.input}
+                keyboardType="default"
+                required
+                autoCapitalize="words"
+                errorText="Geef je achternaam in"
+                onInputChange={inputChangeHandler}
+                initialValue=""
+                color="white"
+              />
+            </View>
+          ) : null}
           <Input
             id="email"
             label="E-mail"
             labelStyle={styles.label}
+            inputStyle={styles.input}
             keyboardType="email-address"
             required
             email
@@ -122,11 +157,13 @@ const AuthScreen = props => {
             errorText="Geef een geldig emailadres in!"
             onInputChange={inputChangeHandler}
             initialValue=""
+            color="white"
           />
           <Input
             id="password"
             label="wachtwoord"
             labelStyle={styles.label}
+            inputStyle={styles.input}
             keyboardType="default"
             required
             secureTextEntry
@@ -135,6 +172,7 @@ const AuthScreen = props => {
             errorText="Geef een geldig password in!"
             onInputChange={inputChangeHandler}
             initialValue=""
+            color="white"
           />
           <View style={styles.buttonContainer}>
             {isLoading ? (
@@ -193,6 +231,9 @@ const styles = StyleSheet.create({
     color: "white"
   },
   label: {
+    color: "white"
+  },
+  input: {
     color: "white"
   }
 });

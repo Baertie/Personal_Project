@@ -13,7 +13,7 @@ const ProfileScreen = props => {
         color={Colors.primaryColor}
         onPress={() => {
           dispatch(authActions.logout);
-          // props.navigation.navigate("Auth");
+          props.navigation.navigate("Auth");
         }}
       />
     </View>

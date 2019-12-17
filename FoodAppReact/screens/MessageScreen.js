@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
+import DefaultText from "../components/DefaultText";
 
 const MessageScreen = props => {
   return (
     <View style={styles.screen}>
-      <Text>Message Screen</Text>
+      <DefaultText text="Message Screen" />
     </View>
   );
 };

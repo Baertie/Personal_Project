@@ -7,7 +7,7 @@ const CategorieItem = props => {
       <TouchableOpacity onPress={props.onSelect}>
         <View style={styles.Container}>
           <Image source={props.imageUrl} style={{ width: 65, height: 65 }} />
-          <Text style={(fontSize = 12)}>{props.title}</Text>
+          <Text style={styles.text}>{props.title}</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "space-evenly"
+  },
+  text: {
+    fontFamily: "open-sans",
+    fontSize: 12
   }
 });
 

@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, Switch, Platform } from "react-native";
+import DefaultText from "../components/DefaultText";
 
 import Colors from "../constants/Colors";
 
 const typeSwitch = props => {
   return (
     <View style={styles.filterContainer}>
-      <Text>{props.label}</Text>
+      <DefaultText text={props.label} />
       <Switch
         trackColor={{ true: Colors.primaryColor }}
         thumbColor={Platform.OS === "android" ? Colors.primaryColor : ""}

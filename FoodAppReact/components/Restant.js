@@ -21,9 +21,11 @@ const Restant = props => {
               borderRadius: 10
             }}
           />
-          <Text>{props.title}</Text>
-          <View>
-            <Text>{props.date}</Text>
+          <View style={styles.infoContainer}>
+            <Text style={styles.title}>{props.title}</Text>
+            <View>
+              <Text style={styles.text}>{props.date}</Text>
+            </View>
           </View>
           <View style={styles.buttons}>{props.children}</View>
         </View>
@@ -43,6 +45,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-around"
+  },
+  title: {
+    fontFamily: "open-sans",
+    fontSize: 15
+  },
+  text: {
+    fontFamily: "open-sans",
+    fontSize: 12
+  },
+  infoContainer: {
+    marginLeft: 10
   }
 });
 

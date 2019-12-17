@@ -94,7 +94,7 @@ const EditRestantScreen = props => {
           formState.inputValues.description
         )
       );
-      console.log("update");
+
       props.navigation.goBack();
     } else {
       dispatch(
@@ -110,8 +110,8 @@ const EditRestantScreen = props => {
           isLactoseFree
         )
       );
-      console.log("create");
-      props.navigation.goBack();
+
+      props.navigation.navigate("Home");
     }
   }, [dispatch, restId, formState]);
 

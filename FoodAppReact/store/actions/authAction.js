@@ -4,8 +4,49 @@ import User from "../../models/user";
 // export const LOGIN = "LOGIN";
 export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
+export const SET_USERS = "SET_USERS";
+export const CREATE_USER = "CREATE_USER";
 
 let timer;
+
+export const fetchUsers = () => {
+  return async (dispatch, getState) => {
+    // any async code you want!
+    const userId = getState().auth.userId;
+    try {
+      const response = await fetch(
+        "https://foodapp-567b3.firebaseio.com/users.json"
+      );
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const resData = await response.json();
+      const loadedUsers = [];
+
+      for (const key in resData) {
+        loadedUsers.push(
+          new User(
+            key,
+            resData[key].ownerId,
+            resData[key].firstName,
+            resData[key].LastName
+          )
+        );
+      }
+
+      dispatch({
+        type: SET_USERS,
+        users: loadedUsers,
+        user: loadedUsers.filter(user => user.ownerId === userId)
+      });
+    } catch (err) {
+      // send to custom analytics server
+      throw err;
+    }
+  };
+};
 
 export const authenticate = (userId, token, expiryTime) => {
   return dispatch => {
@@ -129,4 +170,35 @@ const saveDataToStorage = (token, userId, expirationDate) => {
       expiryDate: expirationDate
     })
   );
+};
+
+export const createUser = (firstName, LastName) => {
+  return async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const response = await fetch(
+      `https://foodapp-567b3.firebaseio.com/users.json`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          ownerId: userId,
+          firstName,
+          LastName
+        })
+      }
+    );
+    const restData = await response.json();
+
+    dispatch({
+      type: CREATE_USER,
+      userData: {
+        id: restData.firstName,
+        ownerId: userId,
+        firstName,
+        LastName
+      }
+    });
+  };
 };

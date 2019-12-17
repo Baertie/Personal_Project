@@ -38,7 +38,6 @@ const HomeScreen = props => {
   const restanten = useSelector(state => state.restanten.restanten);
 
   const renderCategoryItem = itemData => {
-    console.log(itemData.item);
     return (
       <CategorieItem
         title={itemData.item.title}
