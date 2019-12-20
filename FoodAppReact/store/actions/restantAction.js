@@ -21,7 +21,7 @@ export const fetchRestanten = () => {
 
       const resData = await response.json();
       const loadedRestanten = [];
-
+      console.log(resData);
       for (const key in resData) {
         loadedRestanten.push(
           new Restant(

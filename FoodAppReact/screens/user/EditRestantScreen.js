@@ -85,6 +85,7 @@ const EditRestantScreen = props => {
       );
       return;
     }
+
     if (editedRestant) {
       dispatch(
         restantActions.updateRestant(
@@ -94,8 +95,6 @@ const EditRestantScreen = props => {
           formState.inputValues.description
         )
       );
-
-      props.navigation.goBack();
     } else {
       dispatch(
         restantActions.createRestant(
@@ -110,10 +109,18 @@ const EditRestantScreen = props => {
           isLactoseFree
         )
       );
-
-      props.navigation.navigate("Home");
     }
-  }, [dispatch, restId, formState]);
+  }, [
+    dispatch,
+    restId,
+    formState,
+    categorie,
+    date,
+    isGlutenFree,
+    isVegan,
+    isVegetarian,
+    isLactoseFree
+  ]);
 
   useEffect(() => {
     props.navigation.setParams({ submit: submitHandler });

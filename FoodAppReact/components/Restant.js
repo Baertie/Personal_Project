@@ -3,7 +3,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ImageBackground,
+  Image,
   StyleSheet,
   Platform
 } from "react-native";
@@ -13,7 +13,7 @@ const Restant = props => {
     <View style={styles.gridItem}>
       <TouchableOpacity onPress={props.onSelect}>
         <View style={props.style}>
-          <ImageBackground
+          <Image
             source={{ uri: props.imageUrl }}
             style={{
               width: props.width,

@@ -14,7 +14,7 @@ const initialState = {
   filteredRestanten: []
 };
 
-const restantenReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_RESTANTEN:
       return {
@@ -43,7 +43,7 @@ const restantenReducer = (state = initialState, action) => {
       };
     case UPDATE_RESTANT:
       const restantIndex = state.userRestanten.findIndex(
-        restant => restant.id === action.rid
+        rest => rest.id === action.rid
       );
       const updatedRestant = new Restant(
         action.rid,
@@ -62,16 +62,16 @@ const restantenReducer = (state = initialState, action) => {
       const updatedUserRestanten = [...state.userRestanten];
       updatedUserRestanten[restantIndex] = updatedRestant;
 
-      const filteredRestantIndex = state.filteredRestanten.findIndex(
+      const restIndex = state.restanten.findIndex(
         restant => restant.id === action.rid
       );
 
-      const updatedFilteredRestants = [...state.filteredRestanten];
-      updatedFilteredRestants[filteredRestantIndex] = updatedRestant;
+      const updatedRestants = [...state.restanten];
+      updatedRestants[restIndex] = updatedRestant;
 
       return {
         ...state,
-        restanten: updatedFilteredRestants,
+        restanten: updatedRestants,
         userRestanten: updatedUserRestanten
       };
     case SET_FILTERS:
@@ -107,5 +107,3 @@ const restantenReducer = (state = initialState, action) => {
   }
   return state;
 };
-
-export default restantenReducer;
